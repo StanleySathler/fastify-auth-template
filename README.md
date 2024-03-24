@@ -1,18 +1,24 @@
-# fastify-typescript-starter
+# fastify-auth-template
 
-## Features
+## What is this about?
 
-- Continuous Integration
-  - Run tests on every PR or every merge to `main`
-- Integration tests
-  - Tests testing from request to response, without mocks, with maximum confidence
+A template for quickly setting up a Fastify app with different auth methods - Pin code, Google and Facebook.
+
+Stack:
+
+- Node.js
+- Fastify
+- TypeScript
+- Jest
+- Redis
+- Prisma
 
 ## Development
 
 Pre-requisites
 
 ```bash
-npm ci
+npm ci # Install dependencies, locked to package-lock.json
 ```
 
 Available commands:
