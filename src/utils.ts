@@ -2,7 +2,7 @@ import Fastify from "fastify";
 import fastifyCookie from "@fastify/cookie";
 import { TypeBoxTypeProvider } from "@fastify/type-provider-typebox";
 
-import { productRouter } from "./services/product/router";
+import { authRouter } from "./services/auth/router";
 
 export const setupApp = () => {
   const fastify = Fastify({
@@ -20,7 +20,7 @@ export const setupApp = () => {
   /*
    * Router.
    */
-  fastify.register(productRouter, { prefix: "product" });
+  fastify.register(authRouter, { prefix: "auth" });
 
   return fastify;
 };
