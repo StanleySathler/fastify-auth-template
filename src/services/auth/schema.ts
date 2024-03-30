@@ -1,5 +1,5 @@
 import type { FastifySchema } from "fastify";
-import { Type } from "@sinclair/typebox";
+import { Static, Type } from "@sinclair/typebox";
 
 export const loginCallbackQuerystringSchema = Type.Object(
   {
@@ -12,3 +12,7 @@ export const loginCallbackEndpointSchema: FastifySchema = {
   querystring: loginCallbackQuerystringSchema,
   response: {},
 };
+
+export type LoginCallbackQuerystring = Static<
+  typeof loginCallbackQuerystringSchema
+>;

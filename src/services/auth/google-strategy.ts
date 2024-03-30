@@ -1,3 +1,18 @@
+export type GoogleTokenResponse = {
+  access_token: string;
+  expires_in: Number;
+  refresh_token: string;
+  scope: string;
+  id_token: string;
+};
+
+export type GoogleUserDataResponse = {
+  id: string;
+  email: string;
+  verified_email: string;
+  picture: string;
+};
+
 export const exchangeCodeForTokens = async ({
   code,
   clientId,
@@ -8,13 +23,7 @@ export const exchangeCodeForTokens = async ({
   clientId: string;
   clientSecret: string;
   redirectUri: string;
-}): Promise<{
-  access_token: string;
-  expires_in: Number;
-  refresh_token: string;
-  scope: string;
-  id_token: string;
-}> => {
+}): Promise<GoogleTokenResponse> => {
   const url = "https://oauth2.googleapis.com/token";
   const values = {
     code,
@@ -42,14 +51,13 @@ export const exchangeCodeForTokens = async ({
     );
   }
 
-  return (await res.json()) as any; // TODO: remove any
+  return (await res.json()) as GoogleTokenResponse;
 };
 
 export const getUserData = async (
   accessToken: string,
   idToken: string
-): Promise<any> => {
-  // TODO: remove any
+): Promise<GoogleUserDataResponse> => {
   const res = await fetch(
     `https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${accessToken}`,
     {
@@ -60,7 +68,13 @@ export const getUserData = async (
     }
   );
 
-  const userData = await res.json();
-  console.log({ userData });
-  return userData;
+  if (!res.ok) {
+    throw new Error(
+      `Error while fetching user data from Google provider. Code: ${
+        res.status
+      }. Message: ${await res.text()}`
+    );
+  }
+
+  return (await res.json()) as GoogleUserDataResponse;
 };

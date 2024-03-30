@@ -1,5 +1,7 @@
 import type { FastifyInstance } from "fastify";
+import jwt from "jsonwebtoken";
 import { setupApp } from "../../utils";
+import { mockedGoogleUserData } from "../../mocks/server";
 
 let app: FastifyInstance;
 
@@ -27,7 +29,15 @@ describe("Login - Google", () => {
       url: "auth/login/callback?code=valid-code",
     });
 
+    const token = jwt.sign(mockedGoogleUserData, process.env.JWT_SECRET ?? "");
     expect(response.statusCode).toBe(200);
-    // TODO: check if headers have been set
+    expect(response.cookies).toContainEqual(
+      expect.objectContaining({
+        name: "token",
+        value: token,
+        path: "/",
+        httpOnly: true,
+      })
+    );
   });
 });
