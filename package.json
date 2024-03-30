@@ -7,8 +7,8 @@
     "build": "tsc",
     "start": "node ./dist",
     "start:local": "npx ts-node src/index.ts",
-    "test:unit": "jest",
-    "test:unit:watch": "dotenv -e env/test.env -- jest --watch --coverage=false"
+    "test:unit": "dotenv -e env/test.env jest",
+    "test:unit:watch": "npm run test:unit -- --watch --no-coverage"
   },
   "author": "Stanley Sathler",
   "license": "MIT",
