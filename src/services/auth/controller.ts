@@ -33,9 +33,8 @@ export const loginCallback = async (
   const data = await googleStrategy.getUserData(access_token, id_token);
   const token = jwt.sign(data, process.env.JWT_SECRET);
 
-  // Set a cookie with the token.
-  // - Path - ensure token is set for the entire domain, not only to `/login/callback` calls.
-  // - HttpOnly - ensure token is not accessible from JavaScript to prevent XSS attacks.
+  // Path - ensure token is set for the entire domain, not only to `/login/callback` calls.
+  // HttpOnly - ensure token is not accessible from JavaScript to prevent XSS attacks.
   res.header("Set-Cookie", `token=${token}; Path=/; HttpOnly;`);
 
   res.send();
