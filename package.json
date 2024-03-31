@@ -8,13 +8,15 @@
     "start": "node ./dist",
     "start:local": "npx ts-node src/index.ts",
     "test:unit": "jest",
-    "test:unit:watch": "dotenv -e env/test.env -- jest --watch --coverage=false"
+    "test:unit:watch": "dotenv -e env/test.env -- jest --watch --coverage=false",
+    "db:migrate:local": "dotenv -e env/local.env -- prisma migrate dev"
   },
   "author": "Stanley Sathler",
   "license": "MIT",
   "dependencies": {
     "@fastify/cookie": "^9.3.1",
     "@fastify/type-provider-typebox": "^4.0.0",
+    "@prisma/client": "^5.11.0",
     "fastify": "^4.26.2"
   },
   "devDependencies": {
@@ -22,6 +24,7 @@
     "dotenv-cli": "^7.4.1",
     "jest": "^29.7.0",
     "msw": "^2.2.13",
+    "prisma": "^5.11.0",
     "ts-jest": "^29.1.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.3"
