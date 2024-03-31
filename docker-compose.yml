@@ -6,3 +6,12 @@ services:
       dockerfile: ./docker/Dockerfile
     ports:
       - "3001:3001"
+
+  db:
+    image: postgres:16-alpine
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: fastify-auth-template
+    ports:
+      - "5432:5432"
