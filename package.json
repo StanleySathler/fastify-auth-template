@@ -7,9 +7,11 @@
     "build": "tsc",
     "start": "node ./dist",
     "start:local": "npx ts-node src/index.ts",
-    "test:unit": "jest",
-    "test:unit:watch": "dotenv -e env/test.env -- jest --watch --coverage=false",
-    "db:migrate:local": "dotenv -e env/local.env -- prisma migrate dev"
+    "db:migrate:local": "dotenv -e env/local.env -- prisma migrate dev && prisma generate",
+    "db:migrate:test": "dotenv -e env/test.env -- prisma migrate dev && prisma generate",
+    "pretest:unit": "npm run db:migrate:test",
+    "test:unit": "dotenv -e env/test.env -- jest",
+    "test:unit:watch": "npm run test:unit -- --watch --coverage=false"
   },
   "author": "Stanley Sathler",
   "license": "MIT",
