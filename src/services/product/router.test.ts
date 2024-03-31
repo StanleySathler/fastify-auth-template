@@ -1,5 +1,6 @@
 import type { FastifyInstance } from "fastify";
 import { setupApp } from "../../utils";
+import { prismaClient } from "../../prisma";
 
 let app: FastifyInstance;
 
